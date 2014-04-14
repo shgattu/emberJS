@@ -1,0 +1,1 @@
+Emapp.ApplicationAdapter = DS.FixtureAdapter;
