@@ -1,3 +1,21 @@
-<div class="well">
-    Welcome to Yeoman and Ember.js!
+<div>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+            <ul class="nav nav-pills">
+                <li  {{bindAttr class="activeUrl:active :navbar-brand"}}{{action changeClass on="click"}}>{{#linkTo "insight"}}Facebook Insight{{/linkTo}}</li>
+
+
+                <li  {{bindAttr class="activeUrl2:active :navbar-brand"}} {{action changeClass2 on="click"}}>{{#linkTo "feed"}}Facebook Feed{{/linkTo}}</li>
+                <li {{bindAttr class="activeUrl3:active :navbar-brand"}} {{action changeClass3 on="click"}}>{{#linkTo "feedUpdate"}} Facebook Status Update{{/linkTo}}</li>
+            </ul>
+
+        </div>
+sdfsdf
+    </nav>
+    <div class="container" id="main">
+
+        {{outlet "realContent"}}
+
+
+    </div>
 </div>

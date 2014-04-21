@@ -5,6 +5,7 @@ var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
+var connectProxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -53,17 +54,25 @@ module.exports = function (grunt) {
         },
         connect: {
             options: {
-                port: 9000,
+                port: 7060,
                 // change this to '0.0.0.0' to access the server from outside
                 hostname: 'localhost'
             },
+            proxies: [{
+                context: '/EmberRND', // the context of the data service
+                host: 'localhost', // wherever the data service is running
+                port: 8080 // the port that the data service is running on
+            }],
             livereload: {
                 options: {
                     middleware: function (connect) {
+
                         return [
                             lrSnippet,
+                            connectProxy,
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, yeomanConfig.app)
+
                         ];
                     }
                 }
@@ -351,11 +360,14 @@ module.exports = function (grunt) {
             'concurrent:server',
             'neuter:app',
             'copy:fonts',
+            'configureProxies:server',
             'connect:livereload',
             'open',
             'watch'
         ]);
     });
+
+   // grunt.loadNpmTasks('grunt-connect-proxy');
 
     grunt.registerTask('test', [
         'clean:server',

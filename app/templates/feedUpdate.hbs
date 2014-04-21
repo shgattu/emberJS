@@ -1,0 +1,26 @@
+
+        <div class="row" id="fb-form">
+            <div>
+                <div class="well sidebar-nav">
+                    <strong>Facebook Status update Form</strong>
+                </div>
+
+
+                <form class="form-control-static" {{action "submitFB" on="submit"}}>
+
+                    <div class="control-group">
+                        <div class="control-label text-left">
+                            <label>Facebook Status</label>
+                        </div>
+
+
+                        <div class="controls">
+                            {{textarea value=fb-submit}}
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-group">Submit Status to FB</button>
+                </form>
+
+            </div>
+        </div>
